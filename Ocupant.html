@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocupant - Premium Housing Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0066FF;
+            --primary-blue-dark: #0052CC;
+            --primary-blue-light: #4D94FF;
+            --primary-blue-glow: rgba(0, 102, 255, 0.15);
+            --dark-bg: #0a0a0f;
+            --card-bg: #111118;
+            --card-hover: #161620;
+            --surface: #1a1a24;
+            --surface-light: #222230;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #6b6b7b;
+            --border: #2a2a3a;
+            --success: #00c853;
+            --danger: #ff1744;
+            --warning: #ff9100;
+            --gold: #FFB800;
+            --gold-dark: #CC9300;
+            --gradient-blue: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            --gradient-dark: linear-gradient(180deg, var(--dark-bg) 0%, #0f0f1a 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb { background: var(--primary-blue); border-radius: 4px; }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo img { height: 45px; width: auto; }
+
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span { color: var(--primary-blue); }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--primary-blue); }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            outline: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-blue);
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 102, 255, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: #000;
+            font-weight: 700;
+            box-shadow: 0 4px 20px rgba(255, 184, 0, 0.3);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 184, 0, 0.4);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover { background: #128C7E; }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/mnt/agents/upload/154135.png') center/cover;
+            filter: brightness(0.4);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(10,10,15,0.3) 0%, rgba(10,10,15,0.9) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 102, 255, 0.15);
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--primary-blue-light);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--primary-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item { text-align: center; }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Search Bar */
+        .search-section {
+            position: relative;
+            z-index: 10;
+            margin-top: -60px;
+            padding: 0 2rem;
+        }
+
+        .search-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            backdrop-filter: blur(20px);
+        }
+
+        .search-field {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-field i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-field input, .search-field select {
+            width: 100%;
+            padding: 0.9rem 1rem 0.9rem 2.8rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-field input:focus, .search-field select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px var(--primary-blue-glow);
+        }
+
+        .search-field select {
+            cursor: pointer;
+            appearance: none;
+        }
+
+        /* Filters */
+        .filters-section {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .filters-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            padding: 0.6rem 1.2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-chip:hover, .filter-chip.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        .results-count {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .results-count span {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        /* Houses Grid */
+        .houses-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .section-title span { color: var(--primary-blue); }
+
+        .houses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+
+        /* House Card */
+        .house-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .house-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 20px 60px rgba(0, 102, 255, 0.15);
+        }
+
+        .house-image {
+            position: relative;
+            height: 260px;
+            overflow: hidden;
+        }
+
+        .house-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .house-card:hover .house-image img { transform: scale(1.08); }
+
+        .status-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 70px;
+            height: 70px;
+            z-index: 5;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+        }
+
+        .status-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .premium-badge-card {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 55px;
+            height: 55px;
+            z-index: 5;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+            display: none;
+        }
+
+        .premium-badge-card.show { display: block; }
+
+        .premium-badge-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .house-type-badge {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 0.4rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .house-info { padding: 1.5rem; }
+
+        .house-location {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary-blue-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .house-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .house-features {
+            display: flex;
+            gap: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .feature i { color: var(--primary-blue); }
+
+        .house-price {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .price-main {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .price-period {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .price-subsequent {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .price-subsequent span {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .house-actions {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .house-actions .btn {
+            flex: 1;
+            justify-content: center;
+        }
+
+        .blurred-info {
+            filter: blur(4px);
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .locked-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .house-card:hover .locked-overlay { opacity: 1; }
+
+        .locked-message {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .locked-message i {
+            font-size: 3rem;
+            color: var(--warning);
+            margin-bottom: 1rem;
+        }
+
+        .locked-message h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .locked-message p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal { transform: scale(1); }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+        }
+
+        .modal-header { padding: 2rem 2rem 0; }
+
+        .modal-header img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-body { padding: 0 2rem 2rem; }
+
+        .modal-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-location {
+            color: var(--primary-blue-light);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .detail-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .detail-value.price {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .contact-section {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .contact-section h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contact-buttons .btn {
+            flex: 1;
+            justify-content: center;
+        }
+
+        .roommate-section {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(0, 102, 255, 0.05) 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            text-align: center;
+        }
+
+        .roommate-section h4 { margin-bottom: 0.5rem; }
+
+        .roommate-section p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Subscription Section */
+        .subscription-section {
+            background: linear-gradient(135deg, var(--surface) 0%, var(--card-bg) 100%);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 5rem 2rem;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subscription-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 102, 255, 0.05) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .subscription-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subscription-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .subscription-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .subscription-header h2 span { color: var(--gold); }
+
+        .subscription-header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--gold);
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 184, 0, 0.1);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-blue);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-blue);
+            color: white;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card .price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 1rem 0;
+        }
+
+        .pricing-card.featured .price { color: var(--gold); }
+
+        .pricing-card .price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.7rem 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .pricing-features li i { color: var(--success); }
+
+        .pricing-features li.locked { opacity: 0.4; }
+
+        .pricing-features li.locked i { color: var(--danger); }
+
+        /* Footer */
+        .footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand .logo { margin-bottom: 1rem; }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .footer-links h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover { color: var(--primary-blue); }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            z-index: 3000;
+            transform: translateX(150%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .toast.show { transform: translateX(0); }
+
+        .toast-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .toast-icon.success {
+            background: rgba(0, 200, 83, 0.15);
+            color: var(--success);
+        }
+
+        .toast-icon.error {
+            background: rgba(255, 23, 68, 0.15);
+            color: var(--danger);
+        }
+
+        .toast-content h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .toast-content p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* User Badge */
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .user-badge img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .user-badge span {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .user-badge.premium {
+            border-color: var(--gold);
+            background: rgba(255, 184, 0, 0.1);
+        }
+
+        .user-badge.premium span { color: var(--gold); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .houses-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-stats { gap: 1.5rem; }
+            .search-container { flex-direction: column; }
+            .houses-grid { grid-template-columns: 1fr; }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .pricing-card.featured { transform: scale(1); }
+            .contact-buttons { flex-direction: column; }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        /* Loading shimmer */
+        .shimmer {
+            background: linear-gradient(90deg, var(--surface) 25%, var(--surface-light) 50%, var(--surface) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="/mnt/agents/upload/153462.png" alt="Ocupant Logo">
+                <span class="logo-text">Ocu<span>pan</span>t</span>
+            </a>
+            <div class="nav-links">
+                <a href="#houses">Properties</a>
+                <a href="#subscription">Premium</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <div class="user-badge" id="userBadge">
+                    <i class="fas fa-user"></i>
+                    <span>Guest</span>
+                </div>
+                <button class="btn btn-outline" id="authBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </button>
+                <button class="btn btn-primary" onclick="toggleSubscription()">
+                    <i class="fas fa-crown"></i>
+                    Upgrade
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-home"></i>
+                Premium Housing Agency
+            </div>
+            <h1>Find Your Perfect Home</h1>
+            <p>Discover luxury properties in prime locations. From cozy bedsitters to spacious three-bedroom apartments, your dream home awaits.</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalHouses">0</div>
+                    <div class="stat-label">Properties</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="locationsCount">0</div>
+                    <div class="stat-label">Locations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down" style="font-size: 2rem; color: var(--primary-blue);"></i>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="search-container">
+            <div class="search-field">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search by location..." id="searchInput">
+            </div>
+            <div class="search-field">
+                <i class="fas fa-home"></i>
+                <select id="typeFilter">
+                    <option value="">All Types</option>
+                    <option value="Bedsitter">Bedsitter</option>
+                    <option value="Self-Contain">Self-Contain</option>
+                    <option value="Two Bedroom">Two Bedroom</option>
+                    <option value="Three Bedroom">Three Bedroom</option>
+                </select>
+            </div>
+            <div class="search-field">
+                <i class="fas fa-filter"></i>
+                <select id="statusFilter">
+                    <option value="">All Status</option>
+                    <option value="vacant">Vacant</option>
+                    <option value="occupied">Occupied</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" onclick="filterHouses()">
+                <i class="fas fa-search"></i>
+                Search
+            </button>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="filters-section">
+        <div class="filters-row">
+            <div class="filter-group">
+                <button class="filter-chip active" onclick="setFilter('all')">All Properties</button>
+                <button class="filter-chip" onclick="setFilter('vacant')">Vacant Only</button>
+                <button class="filter-chip" onclick="setFilter('occupied')">Occupied</button>
+                <button class="filter-chip" onclick="setFilter('premium')">Premium Locations</button>
+            </div>
+            <div class="results-count">
+                Showing <span id="showingCount">0</span> of <span id="totalCount">0</span> properties
+            </div>
+        </div>
+    </section>
+
+    <!-- Houses Grid -->
+    <section class="houses-section" id="houses">
+        <div class="section-header">
+            <h2 class="section-title">Available <span>Properties</span></h2>
+            <button class="btn btn-outline btn-sm" onclick="resetFilters()">
+                <i class="fas fa-rotate-left"></i>
+                Reset Filters
+            </button>
+        </div>
+        <div class="houses-grid" id="housesGrid">
+            <!-- Houses will be injected here -->
+        </div>
+    </section>
+
+    <!-- Subscription Section -->
+    <section class="subscription-section" id="subscription">
+        <div class="subscription-container">
+            <div class="subscription-header">
+                <h2>Unlock <span>Premium</span> Access</h2>
+                <p>Upgrade your account to unlock full access to all features including exact locations, landlord contacts, and roommate matching.</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <div class="price">Free <span>/forever</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> View all properties</li>
+                        <li><i class="fas fa-check"></i> See pricing details</li>
+                        <li><i class="fas fa-check"></i> Generic location info</li>
+                        <li class="locked"><i class="fas fa-times"></i> Exact location access</li>
+                        <li class="locked"><i class="fas fa-times"></i> Landlord contact details</li>
+                        <li class="locked"><i class="fas fa-times"></i> Roommate finder</li>
+                        <li class="locked"><i class="fas fa-times"></i> Premium badge</li>
+                    </ul>
+                    <button class="btn btn-outline" style="width: 100%;" onclick="setBasic()">
+                        Current Plan
+                    </button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <h3>Premium</h3>
+                    <div class="price">$29 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> View all properties</li>
+                        <li><i class="fas fa-check"></i> See pricing details</li>
+                        <li><i class="fas fa-check"></i> Exact location access</li>
+                        <li><i class="fas fa-check"></i> Landlord contact details</li>
+                        <li><i class="fas fa-check"></i> WhatsApp integration</li>
+                        <li><i class="fas fa-check"></i> Roommate finder</li>
+                        <li><i class="fas fa-check"></i> Premium badge</li>
+                    </ul>
+                    <button class="btn btn-gold" style="width: 100%;" onclick="setPremium()">
+                        <i class="fas fa-crown"></i>
+                        Upgrade Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <img src="/mnt/agents/upload/153462.png" alt="Ocupant Logo" style="height: 50px;">
+                        <span class="logo-text">Ocu<span>pan</span>t</span>
+                    </a>
+                    <p>Your trusted premium housing agency. We connect you with the finest properties and ensure a seamless renting experience.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#houses">Properties</a>
+                    <a href="#subscription">Pricing</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <a href="#"><i class="fas fa-envelope"></i> info@ocupant.com</a>
+                    <a href="#"><i class="fas fa-phone"></i> +1 (555) 123-4567</a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> New York, NY</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> 2026 Ocupant Agency. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- House Detail Modal -->
+    <div class="modal-overlay" id="houseModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modalContent">
+                <!-- Content injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal" style="max-width: 420px;">
+            <button class="modal-close" onclick="closeAuthModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body" style="padding-top: 2.5rem;">
+                <h2 class="modal-title" id="authTitle">Welcome back</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;" id="authSubtitle">Log in to contact owners and upgrade to Premium.</p>
+                <div class="search-field" style="margin-bottom: 1rem;" id="authNameField">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="authName" placeholder="Full name">
+                </div>
+                <div class="search-field" style="margin-bottom: 1rem;">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="authEmail" placeholder="Email">
+                </div>
+                <div class="search-field" style="margin-bottom: 1.5rem;">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="authPassword" placeholder="Password (min 8 characters)" onkeydown="if(event.key==='Enter')submitAuth()">
+                </div>
+                <button class="btn btn-primary" style="width: 100%; justify-content: center;" id="authSubmitBtn" onclick="submitAuth()">Login</button>
+                <p style="text-align: center; margin-top: 1.2rem; color: var(--text-secondary); font-size: 0.9rem;">
+                    <span id="authSwitchText">No account yet?</span>
+                    <a href="javascript:void(0)" style="color: var(--primary-blue); font-weight: 600;" onclick="toggleAuthMode()" id="authSwitchLink">Register</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon" id="toastIcon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="toast-content">
+            <h4 id="toastTitle">Success</h4>
+            <p id="toastMessage">Operation completed successfully.</p>
+        </div>
+    </div>
+
+    <script>
+        // ===== API layer (backend: ocupant-backend, default http://localhost:4000) =====
+        const API_URL = 'http://localhost:4000/api';
+        let token = localStorage.getItem('ocupant_token');
+        let currentUser = null;
+        let housesData = [];
+        let isPremium = false;
+        let currentFilter = 'all';
+        let filteredHouses = [];
+
+        async function api(path, options = {}) {
+            const res = await fetch(API_URL + path, {
+                ...options,
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(token ? { Authorization: 'Bearer ' + token } : {}),
+                    ...(options.headers || {})
+                }
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(data.error || ('Request failed (' + res.status + ')'));
+            return data;
+        }
+
+        async function loadHouses(overrides = {}) {
+            const params = new URLSearchParams();
+            const q = (document.getElementById('searchInput')?.value || '').trim();
+            const type = document.getElementById('typeFilter')?.value || '';
+            const status = document.getElementById('statusFilter')?.value || '';
+            if (q) params.set('search', q);
+            if (type) params.set('type', type);
+            if (status) params.set('status', status);
+            for (const [k, v] of Object.entries(overrides)) {
+                if (v !== undefined && v !== '') params.set(k, v);
+            }
+            try {
+                const data = await api('/houses?' + params.toString());
+                housesData = data.houses;
+                filteredHouses = [...housesData];
+                isPremium = data.premium;
+                updateStats();
+                renderHouses();
+                updateUserBadge();
+            } catch (e) {
+                showToast('Connection error', 'Could not reach the API at ' + API_URL + ' — is the backend running?', 'error');
+            }
+        }
+
+        async function restoreSession() {
+            if (!token) { updateUserBadge(); return; }
+            try {
+                const { user } = await api('/auth/me');
+                currentUser = user;
+                isPremium = user.premium;
+            } catch {
+                localStorage.removeItem('ocupant_token');
+                token = null;
+                currentUser = null;
+                isPremium = false;
+            }
+            updateUserBadge();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            toggleAuthMode();          // put auth modal into login state
+            updateUserBadge();         // show Guest/Login before session restore
+            await restoreSession();    // resume logged-in session if token exists
+            await loadHouses();        // fetch houses (server applies premium gating)
+            handlePaymentReturn();     // toast after Flutterwave redirects back
+            animateNumbers();
+        });
+
+        function updateStats() {
+            document.getElementById('totalHouses').textContent = housesData.length;
+            const uniqueLocations = [...new Set(housesData.map(h => h.location.split(',')[1]?.trim() || h.location))];
+            document.getElementById('locationsCount').textContent = uniqueLocations.length;
+        }
+
+        function animateNumbers() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                if (!isNaN(target)) {
+                    let current = 0;
+                    const increment = target / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            counter.textContent = target;
+                            clearInterval(timer);
+                        } else {
+                            counter.textContent = Math.floor(current);
+                        }
+                    }, 30);
+                }
+            });
+        }
+
+        function renderHouses() {
+            const grid = document.getElementById('housesGrid');
+            const showingCount = document.getElementById('showingCount');
+            const totalCount = document.getElementById('totalCount');
+
+            grid.innerHTML = '';
+            showingCount.textContent = filteredHouses.length;
+            totalCount.textContent = housesData.length;
+
+            filteredHouses.forEach((house, index) => {
+                const card = createHouseCard(house, index);
+                grid.appendChild(card);
+            });
+        }
+
+        function createHouseCard(house, index) {
+            const card = document.createElement('div');
+            card.className = 'house-card animate-in delay-' + ((index % 3) + 1);
+
+            const statusBadge = house.status === 'vacant' ? '/mnt/agents/upload/166145.png' : '/mnt/agents/upload/166144.png';
+            const location = house.location;
+            const priceDisplay = isPremium ? 
+                `<div class="house-price">
+                    <span class="price-main">$${house.firstYearPrice.toLocaleString()}</span>
+                    <span class="price-period">/year</span>
+                </div>
+                <div class="price-subsequent">Subsequent years: <span>$${house.subsequentPrice.toLocaleString()}/year</span></div>` :
+                `<div class="house-price">
+                    <span class="price-main">$${house.firstYearPrice.toLocaleString()}</span>
+                    <span class="price-period">/year</span>
+                </div>`;
+
+            const contactButtons = isPremium ? 
+                `<button class="btn btn-primary btn-sm" onclick="showHouseDetails(${house.id})">
+                    <i class="fas fa-info-circle"></i> Details
+                </button>
+                <button class="btn btn-whatsapp btn-sm" onclick="contactOwner('${house.owner.whatsapp}', '${house.title}')">
+                    <i class="fab fa-whatsapp"></i> Chat
+                </button>` :
+                `<button class="btn btn-primary btn-sm" onclick="showHouseDetails(${house.id})">
+                    <i class="fas fa-info-circle"></i> Details
+                </button>
+                <button class="btn btn-outline btn-sm" onclick="showPremiumPrompt()">
+                    <i class="fas fa-lock"></i> Unlock
+                </button>`;
+
+            const premiumBadgeClass = isPremium ? 'show' : '';
+
+            card.innerHTML = `
+                <div class="house-image">
+                    <img src="${house.image}" alt="${house.title}" loading="lazy">
+                    <div class="status-badge">
+                        <img src="${statusBadge}" alt="${house.status}">
+                    </div>
+                    <div class="premium-badge-card ${premiumBadgeClass}">
+                        <img src="/mnt/agents/upload/153463.png" alt="Premium">
+                    </div>
+                    <div class="house-type-badge">${house.type}</div>
+                </div>
+                <div class="house-info">
+                    <div class="house-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        ${location}
+                    </div>
+                    <h3 class="house-title">${house.title}</h3>
+                    <div class="house-features">
+                        <div class="feature">
+                            <i class="fas fa-bed"></i>
+                            ${house.beds} Beds
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bath"></i>
+                            ${house.baths} Baths
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i>
+                            ${house.area}
+                        </div>
+                    </div>
+                    ${priceDisplay}
+                    <div class="house-actions">
+                        ${contactButtons}
+                    </div>
+                </div>
+                ${!isPremium ? `
+                <div class="locked-overlay">
+                    <div class="locked-message">
+                        <i class="fas fa-crown"></i>
+                        <h4>Premium Feature</h4>
+                        <p>Upgrade to unlock full details</p>
+                        <button class="btn btn-gold btn-sm" onclick="toggleSubscription()">
+                            Upgrade Now
+                        </button>
+                    </div>
+                </div>
+                ` : ''}
+            `;
+
+            return card;
+        }
+
+        async function filterHouses() {
+            await loadHouses();
+        }
+
+        async function setFilter(filter) {
+            currentFilter = filter;
+
+            // Update active chip
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            if (filter === 'all') {
+                filteredHouses = [...housesData];
+            } else if (filter === 'vacant') {
+                filteredHouses = housesData.filter(h => h.status === 'vacant');
+            } else if (filter === 'occupied') {
+                filteredHouses = housesData.filter(h => h.status === 'occupied');
+            } else if (filter === 'premium') {
+                await loadHouses({ minPrice: 40001 });
+                return;
+            }
+
+            renderHouses();
+        }
+
+        async function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('typeFilter').value = '';
+            document.getElementById('statusFilter').value = '';
+            currentFilter = 'all';
+            document.querySelectorAll('.filter-chip').forEach((chip, i) => {
+                chip.classList.toggle('active', i === 0);
+            });
+            await loadHouses();
+        }
+
+        function showHouseDetails(houseId) {
+            const house = housesData.find(h => h.id === houseId);
+            if (!house) return;
+
+            const modal = document.getElementById('houseModal');
+            const content = document.getElementById('modalContent');
+
+            const location = house.location;
+            const phoneDisplay = isPremium ? 
+                `<a href="tel:${house.owner.phone}" style="color: var(--primary-blue); text-decoration: none;">${house.owner.phone}</a>` :
+                `<span class="blurred-info">+1 (XXX) XXX-XXXX</span>`;
+
+            const contactButtons = isPremium ? `
+                <div class="contact-buttons">
+                    <a href="tel:${house.owner.phone}" class="btn btn-primary">
+                        <i class="fas fa-phone"></i> Call Owner
+                    </a>
+                    <a href="https://wa.me/${house.owner.whatsapp}?text=Hi, I'm interested in your property: ${encodeURIComponent(house.title)}" target="_blank" class="btn btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+            ` : `
+                <div class="contact-buttons">
+                    <button class="btn btn-outline" onclick="showPremiumPrompt()">
+                        <i class="fas fa-lock"></i> Unlock Contacts
+                    </button>
+                </div>
+            `;
+
+            const roommateSection = isPremium ? `
+                <div class="roommate-section">
+                    <h4><i class="fas fa-users" style="color: var(--primary-blue); margin-right: 8px;"></i>Find a Roommate</h4>
+                    <p>Looking to split costs? Connect with potential roommates for this property.</p>
+                    <button class="btn btn-primary" onclick="findRoommate('${house.title}')">
+                        <i class="fas fa-user-plus"></i> Find Roommate
+                    </button>
+                </div>
+            ` : `
+                <div class="roommate-section" style="opacity: 0.5;">
+                    <h4><i class="fas fa-lock" style="margin-right: 8px;"></i>Find a Roommate</h4>
+                    <p>Premium feature - Upgrade to find roommates</p>
+                    <button class="btn btn-outline" onclick="showPremiumPrompt()">
+                        <i class="fas fa-crown"></i> Upgrade to Access
+                    </button>
+                </div>
+            `;
+
+            content.innerHTML = `
+                <div class="modal-header">
+                    <img src="${house.image}" alt="${house.title}">
+                </div>
+                <div class="modal-body">
+                    <h2 class="modal-title">${house.title}</h2>
+                    <div class="modal-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        ${location}
+                        ${!isPremium ? '<span style="margin-left: 8px; font-size: 0.8rem; color: var(--warning);"><i class="fas fa-lock"></i> Exact location hidden</span>' : ''}
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Property Type</span>
+                        <span class="detail-value">${house.type}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Bedrooms</span>
+                        <span class="detail-value">${house.beds}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Bathrooms</span>
+                        <span class="detail-value">${house.baths}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Area</span>
+                        <span class="detail-value">${house.area}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">First Year Rent</span>
+                        <span class="detail-value price">$${house.firstYearPrice.toLocaleString()}/year</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Subsequent Years</span>
+                        <span class="detail-value price" style="color: var(--success);">$${house.subsequentPrice.toLocaleString()}/year</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Status</span>
+                        <span class="detail-value" style="color: ${house.status === 'vacant' ? 'var(--success)' : 'var(--danger)'}; text-transform: capitalize;">
+                            <i class="fas fa-circle" style="font-size: 0.6rem; margin-right: 6px;"></i>${house.status}
+                        </span>
+                    </div>
+
+                    <div class="contact-section">
+                        <h4><i class="fas fa-user-tie" style="margin-right: 8px;"></i>Property Owner</h4>
+                        <div class="detail-row" style="border-bottom: none; padding: 0.5rem 0;">
+                            <span class="detail-label">Name</span>
+                            <span class="detail-value">${isPremium ? house.owner.name : '<span class="blurred-info">J*** R*******</span>'}</span>
+                        </div>
+                        <div class="detail-row" style="border-bottom: none; padding: 0.5rem 0;">
+                            <span class="detail-label">Phone</span>
+                            <span class="detail-value">${phoneDisplay}</span>
+                        </div>
+                        ${contactButtons}
+                    </div>
+
+                    ${roommateSection}
+                </div>
+            `;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('houseModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function contactOwner(whatsapp, title) {
+            const house = housesData.find(h => h.title === title);
+            if (house) {
+                api(`/houses/${house.id}/inquire`, {
+                    method: 'POST',
+                    body: JSON.stringify({ channel: 'whatsapp' })
+                }).catch(() => {});
+            }
+            window.open(`https://wa.me/${whatsapp}?text=Hi, I'm interested in your property: ${encodeURIComponent(title)}`, '_blank');
+        }
+
+        async function findRoommate(propertyTitle) {
+            const house = housesData.find(h => h.title === propertyTitle);
+            if (!house) return;
+            if (!currentUser) {
+                openAuthModal();
+                showToast('Login required', 'Log in to use the roommate finder.', 'error');
+                return;
+            }
+            try {
+                await api(`/roommates/${house.id}`, {
+                    method: 'POST',
+                    body: JSON.stringify({ message: 'Interested in splitting this property.' })
+                });
+                const { roommates } = await api(`/roommates/${house.id}`);
+                showToast('Roommate Finder', roommates.length + ' potential roommate(s) listed for this property!', 'success');
+            } catch (e) {
+                showToast('Roommate Finder', e.message, 'error');
+            }
+        }
+
+        function toggleSubscription() {
+            document.getElementById('subscription').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function setPremium() {
+            if (!currentUser) {
+                openAuthModal();
+                showToast('Login required', 'Log in or create an account to upgrade.', 'error');
+                return;
+            }
+            try {
+                // Opens Flutterwave checkout in the same tab; the backend verifies
+                // the payment and credits Premium when the user is redirected back.
+                const data = await api('/payments/flutterwave/initialize', { method: 'POST' });
+                window.location.href = data.payment_link;
+            } catch (e) {
+                showToast('Payment failed', e.message, 'error');
+            }
+        }
+
+        // Called on page load after Flutterwave redirects back with ?payment=...
+        function handlePaymentReturn() {
+            const params = new URLSearchParams(window.location.search);
+            const payment = params.get('payment');
+            if (!payment) return;
+            history.replaceState(null, '', window.location.pathname);
+            if (payment === 'success') {
+                restoreSession().then(() => loadHouses());
+                showToast('Payment successful', 'Your Premium plan is now active!', 'success');
+            } else if (payment === 'cancelled') {
+                showToast('Payment cancelled', 'You can upgrade anytime.', 'error');
+            } else if (payment === 'failed') {
+                showToast('Payment failed', 'Could not verify your payment. Contact support if you were charged.', 'error');
+            }
+        }
+
+        async function setBasic() {
+            try {
+                await api('/subscription/cancel', { method: 'POST' });
+                await restoreSession();
+                await loadHouses();
+                showToast('Switched to Basic', 'You are now on the Basic plan.', 'success');
+            } catch (e) {
+                showToast('Request failed', e.message, 'error');
+            }
+        }
+
+        function updateUserBadge() {
+            const badge = document.getElementById('userBadge');
+            const authBtn = document.getElementById('authBtn');
+            if (currentUser) {
+                badge.className = 'user-badge' + (isPremium ? ' premium' : '');
+                badge.innerHTML = isPremium
+                    ? '<img src="/mnt/agents/upload/153463.png" alt="Premium" style="width: 20px; height: 20px;"><span>' + currentUser.name + ' &middot; Premium</span>'
+                    : '<i class="fas fa-user"></i><span>' + currentUser.name + '</span>';
+                authBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Logout';
+                authBtn.onclick = logout;
+            } else {
+                badge.className = 'user-badge';
+                badge.innerHTML = '<i class="fas fa-user"></i><span>Guest</span>';
+                authBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+                authBtn.onclick = openAuthModal;
+            }
+        }
+
+        function showPremiumPrompt() {
+            showToast('Premium Required', 'Upgrade to Premium to unlock this feature!', 'error');
+            setTimeout(() => {
+                toggleSubscription();
+            }, 1500);
+        }
+
+        function showToast(title, message, type) {
+            const toast = document.getElementById('toast');
+            const toastIcon = document.getElementById('toastIcon');
+            const toastTitle = document.getElementById('toastTitle');
+            const toastMessage = document.getElementById('toastMessage');
+
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+            toastIcon.className = 'toast-icon ' + type;
+            toastIcon.innerHTML = type === 'success' ? '<i class="fas fa-check"></i>' : '<i class="fas fa-exclamation-circle"></i>';
+
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // ===== Auth =====
+        let authMode = 'login';
+
+        function openAuthModal() {
+            document.getElementById('authModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function toggleAuthMode() {
+            authMode = authMode === 'login' ? 'register' : 'login';
+            const isLogin = authMode === 'login';
+            document.getElementById('authTitle').textContent = isLogin ? 'Welcome back' : 'Create account';
+            document.getElementById('authSubtitle').textContent = isLogin
+                ? 'Log in to contact owners and upgrade to Premium.'
+                : 'Sign up to save properties, find roommates and upgrade.';
+            document.getElementById('authNameField').style.display = isLogin ? 'none' : 'block';
+            document.getElementById('authSubmitBtn').textContent = isLogin ? 'Login' : 'Register';
+            document.getElementById('authSwitchText').textContent = isLogin ? 'No account yet?' : 'Already have an account?';
+            document.getElementById('authSwitchLink').textContent = isLogin ? 'Register' : 'Login';
+        }
+
+        async function submitAuth() {
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value;
+            try {
+                let data;
+                if (authMode === 'login') {
+                    data = await api('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) });
+                } else {
+                    const name = document.getElementById('authName').value.trim();
+                    data = await api('/auth/register', { method: 'POST', body: JSON.stringify({ name, email, password }) });
+                }
+                token = data.token;
+                currentUser = data.user;
+                localStorage.setItem('ocupant_token', token);
+                closeAuthModal();
+                await loadHouses();
+                showToast('Welcome, ' + currentUser.name,
+                    'Logged in as ' + (currentUser.premium ? 'Premium' : 'Basic') + '.', 'success');
+            } catch (e) {
+                showToast('Authentication failed', e.message, 'error');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('ocupant_token');
+            token = null;
+            currentUser = null;
+            isPremium = false;
+            loadHouses();
+            showToast('Logged out', 'See you soon!', 'success');
+        }
+
+        // Close modals on overlay click
+        document.getElementById('houseModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        });
+        document.getElementById('authModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeAuthModal();
+        });
+
+        // Close modals on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeAuthModal();
+            }
+        });
+    </script>
+</body>
+</html>
